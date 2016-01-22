@@ -13,13 +13,8 @@
     // existing version for noConflict()
     var _Base64 = global.Base64;
     var version = "2.1.9";
-    // if node.js, we use Buffer
+    // if node.js
     var buffer;
-    if (typeof module !== 'undefined' && module.exports) {
-        try {
-            buffer = require('buffer').Buffer;
-        } catch (err) {}
-    }
     // constants
     var b64chars
         = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -187,6 +182,12 @@
                 }));
         };
     }
+
+    // Module export
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = global.Base64;
+    }
+
     // that's it!
     if (global['Meteor']) {
        Base64 = global.Base64; // for normal export in Meteor.js
